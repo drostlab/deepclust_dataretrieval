@@ -97,3 +97,13 @@ This file is provided as a parquet file or as a persistent DuckDB database.
 The script extracts indices from the DuckDB database and if only the parquet file is downloaded, the script will create the database at the same place with the name "persistent".
 
 Inspired by MMseqs2 internal cluster format and the [FFindex](https://github.com/ahcm/ffindex) format.
+
+## Mapping any Sequence ID onto the corresponding cluster
+The file called "SeqIdMapClustId.parquet" contains two columns: SEQID and CLUSTERID.
+First contains the sequence ID, and the file is sorted by this column.
+The second contains the corresponding centroid ID or cluster ID.  
+With [DuckDB](https://duckdb.org/), the file can be queried fast:  
+~~~ 
+duckdb -c "SELECT * FROM read_parquet('SeqIdMapClustId.parquet') WHERE SEQID = 'SEQUENCE ID';"
+~~~ 
+Replace SEQUENCE ID by the desired sequence.
