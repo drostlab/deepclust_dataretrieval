@@ -1,6 +1,7 @@
 # Cluster Extraction for the DeepClust Database:
 
-This script extract clusters from the DeepClust Database efficiently and fast with [Apache Parquet](https://parquet.apache.org/) and [DuckDB](https://duckdb.org/).
+This script extract clusters from the DeepClust Database efficiently and fast with [Apache Parquet](https://parquet.apache.org/) and [DuckDB](https://duckdb.org/).  
+Download the Databases [here](https://datashare.mpcdf.mpg.de/s/WrGg0x9jsuashqo).
 
 ## General
 
@@ -42,10 +43,12 @@ Clusters are represented by centroid sequences. The script takes a comma separat
 The script also accepts a file where each line contains a centroid ID, both input modes can be combined.  
 [path_to_DCD PATH/TO/DeepClustDatabase]  
 *Location of the DeepClust database in parquet format*  
+Download [here](https://datashare.mpcdf.mpg.de/s/WrGg0x9jsuashqo).  
 [path_to_output PATH/TO/OUTPUT/DIRECTORY]  
 *Path to Output Directory*  
 [path_to_index /PATH/TO/INDEX]  
 *Path to index in parquet format, DuckDB persistent Database will be created here if not already existent.*   
+Download [here](https://datashare.mpcdf.mpg.de/s/WrGg0x9jsuashqo).  
 [--per-clust-output INT]   
 *0: All Sequences are written to a single FASTA file; 1: For each cluster a Fasta file is written.*   
 [--threads INT]  
