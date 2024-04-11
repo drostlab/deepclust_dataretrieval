@@ -1,7 +1,7 @@
 # Cluster Extraction for the DeepClust Database:
 
 This script extract clusters from the DeepClust Database efficiently and fast with [Apache Parquet](https://parquet.apache.org/) and [DuckDB](https://duckdb.org/).  
-Download the Databases [here](https://datashare.mpcdf.mpg.de/s/WrGg0x9jsuashqo).
+Download the Databases [here](https://objectstore.hpccloud.mpcdf.mpg.de/deepclust/index.html).
 
 ## General
 
@@ -43,12 +43,12 @@ Clusters are represented by centroid sequences. The script takes a comma separat
 The script also accepts a file where each line contains a centroid ID, both input modes can be combined.  
 [path_to_DCD PATH/TO/DeepClustDatabase]  
 *Location of the DeepClust database in parquet format*  
-Download [here](https://datashare.mpcdf.mpg.de/s/WrGg0x9jsuashqo).  
+Download [here](https://objectstore.hpccloud.mpcdf.mpg.de/deepclust/index.html).  
 [path_to_output PATH/TO/OUTPUT/DIRECTORY]  
 *Path to Output Directory*  
 [path_to_index /PATH/TO/INDEX]  
 *Path to index in parquet format, DuckDB persistent Database will be created here if not already existent.*   
-Download [here](https://datashare.mpcdf.mpg.de/s/WrGg0x9jsuashqo).  
+Download [here](https://objectstore.hpccloud.mpcdf.mpg.de/deepclust/index.html).  
 [--per-clust-output INT]   
 *0: All Sequences are written to a single FASTA file; 1: For each cluster a Fasta file is written.*   
 [--threads INT]  
@@ -102,11 +102,11 @@ The script extracts indices from the DuckDB database and if only the parquet fil
 Inspired by MMseqs2 internal cluster format and the [FFindex](https://github.com/ahcm/ffindex) format.
 
 ## Mapping any Sequence ID onto the corresponding cluster
-The file called "SeqIdMapClustId.parquet" contains two columns: SEQID and CLUSTERID.
+The file called ["SeqIdMapClustId.parquet"]((https://objectstore.hpccloud.mpcdf.mpg.de/deepclust/index.html)) contains two columns: SEQID and CLUSTERID.
 First contains the sequence ID, and the file is sorted by this column.
 The second contains the corresponding centroid ID or cluster ID.  
 With [DuckDB](https://duckdb.org/), the file can be queried fast:  
 ~~~ 
 duckdb -c "SELECT * FROM read_parquet('SeqIdMapClustId.parquet') WHERE SEQID = 'SEQUENCE ID';"
 ~~~ 
-Replace SEQUENCE ID by the desired sequence.
+Replace SEQUENCE ID by the desired sequence to get the cluster ID of which the SEQUENCE is part.
