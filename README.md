@@ -68,7 +68,7 @@ python3 cluster_index.py --centroids NR_UGC79169.1 --per-clust-output 1 --thread
 Extraction of the cluster will be written to /PATH/TO/OUTPUT/ into a FASTA file named "NR_UGC79169.1.fa" and done on one CPU. 
 
 ## Datafile Description
-The database file ("joined_with_index_RowGroupFinal.parquet) contains 4 columns and 19 388 011 922 rows: 
+The database file ["joined_with_index_RowGroupFinal.parquet"](https://objectstore.hpccloud.mpcdf.mpg.de/deepclust/index.html) contains 4 columns and 19 388 011 922 rows: 
 
  | f0 (Sequence ID)                                                          | f1 (Sequence)                                         | f2 (Cluster ID)                                                           | f3 (Row Number) |
  |---------------------------------------------------------------------------|-------------------------------------------------------|---------------------------------------------------------------------------|-----------------|
@@ -76,12 +76,14 @@ The database file ("joined_with_index_RowGroupFinal.parquet) contains 4 columns 
  | .<br/>.<br/>.                                                             | .<br/>.<br/>.                                         | .<br/>.<br/>.                                                             | .<br/>.<br/>.   |
  | metaclust_all_tagenome__1003787_1003787.scaffolds.fasta_scaffold9999973_2 | MSAALVAGFVTVLLWGSAFVGIR                               | metaclust_all_tagenome__1003787_1003787.scaffolds.fasta_scaffold9999973_2 | 19388011921     |
 
+This file contains all sequences clustered with [DIAOMND DeepClust DIAMONDv2](https://doi.org/10.1038/s41592-021-01101-x), which are grouped by CLuster IDs. 
+First column has the sequence ids; the second the amino acid sequence and the last and third column the cluster id. The fourth column only has the rownumber for faster querying.
 Since all members of a cluster are grouped and the start of a cluster is known, the row-number column can be used to search for a cluster efficiently with predicate pushdown.
 Additionally, more columns could be added in the future containing more information for each sequence without influencing the cluster extraction process.
 
 
 
- The index file ("clust_index_RowGroup.parquet") contains 4 Columns and 335 434 803 Rows:
+ The index file ["clust_index_RowGroup.parquet"](https://objectstore.hpccloud.mpcdf.mpg.de/deepclust/index.html) contains 4 Columns and 335 434 803 Rows:
 
 |RowStart|NMEMBER|CLUSTER| RowGroup      |
 |-----|----|----|---------------|
@@ -102,7 +104,7 @@ The script extracts indices from the DuckDB database and if only the parquet fil
 Inspired by MMseqs2 internal cluster format and the [FFindex](https://github.com/ahcm/ffindex) format.
 
 ## Mapping any Sequence ID onto the corresponding cluster
-The file called ["SeqIdMapClustId.parquet"]((https://objectstore.hpccloud.mpcdf.mpg.de/deepclust/index.html)) contains two columns: SEQID and CLUSTERID.
+The file called ["SeqIdMapClustId.parquet"](https://objectstore.hpccloud.mpcdf.mpg.de/deepclust/index.html) contains two columns: SEQID and CLUSTERID.
 First contains the sequence ID, and the file is sorted by this column.
 The second contains the corresponding centroid ID or cluster ID.  
 With [DuckDB](https://duckdb.org/), the file can be queried fast:  
